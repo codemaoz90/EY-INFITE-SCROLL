@@ -1,13 +1,22 @@
 <template>
-	<div class="row">
-		<Notification :deleted="this.deleted"></Notification>
+	<div class="text-center">
+		<div class="row">
+			<Notification :deleted="this.deleted"></Notification>
+			<div
+				v-for="photo in gallery"
+				:key="photo.id"
+				@click="deleteImg(photo)"
+				class="col-6 col-sm-3 mb-3"
+			>
+				<GalleryImg :src="photo.url" />
+			</div>
+		</div>
 		<div
-			v-for="photo in gallery"
-			:key="photo.id"
-			@click="deleteImg(photo)"
-			class="col-6 col-sm-3 mb-3"
+			v-if="loading"
+			class="spinner-border text-info text-center"
+			role="status"
 		>
-			<GalleryImg :src="photo.url" />
+			<span class="visually-hidden">Loading...</span>
 		</div>
 	</div>
 </template>
@@ -25,6 +34,7 @@ export default {
 			start: 0,
 			end: 20,
 			gallery: null,
+			loading: false,
 			deleted: {
 				state: false,
 				photo: null,
@@ -50,8 +60,12 @@ export default {
 				window.scrollY + window.innerHeight >=
 				document.body.scrollHeight - 50
 			) {
-				const newList = this.getListImages();
-				this.gallery = [...this.gallery, ...newList];
+				this.loading = true;
+				setTimeout(() => {
+					const newList = this.getListImages();
+					this.gallery = [...this.gallery, ...newList];
+					this.loading = false;
+				}, 2000);
 			}
 		},
 		deleteImg(photo) {
