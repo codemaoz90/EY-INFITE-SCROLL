@@ -1,28 +1,29 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+	<div id="app">
+		<AppLayout>
+			<template #header>
+				<h1 class="title">
+					EY-PRUEBA-TÉCNICA
+					<span>Infinite Scroll</span>
+				</h1>
+			</template>
+			<template #content>
+				<GalleryPhotos />
+			</template>
+		</AppLayout>
+	</div>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
-
+import AppLayout from "./components/Layout.vue";
+import GalleryPhotos from "./components/Gallery";
 export default {
-  name: "App",
-  components: {
-    HelloWorld,
-  },
+	name: "App",
+	components: {
+		GalleryPhotos,
+		AppLayout,
+	},
 };
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
