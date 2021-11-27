@@ -1,5 +1,6 @@
 <template>
 	<div class="row">
+		<Notification :deleted="this.deleted"></Notification>
 		<div
 			v-for="photo in gallery"
 			:key="photo.id"
@@ -14,16 +15,20 @@
 <script>
 import axios from "axios";
 import GalleryImg from "./GalleryImg.vue";
-
+import Notification from "./Notification.vue";
 export default {
-	name: "Card",
-	components: { GalleryImg },
+	name: "GalleryPhotos",
+	components: { GalleryImg, Notification },
 	data() {
 		return {
 			images: [],
 			start: 0,
 			end: 20,
 			gallery: null,
+			deleted: {
+				state: false,
+				photo: null,
+			},
 		};
 	},
 	methods: {
@@ -52,6 +57,12 @@ export default {
 		deleteImg(photo) {
 			const indexOfPhoto = this.gallery.indexOf(photo);
 			this.gallery.splice(indexOfPhoto, 1);
+
+			this.deleted.state = true;
+			this.deleted.photo = photo.id;
+			setTimeout(() => {
+				this.deleted.state = false;
+			}, 3000);
 		},
 	},
 	async mounted() {
