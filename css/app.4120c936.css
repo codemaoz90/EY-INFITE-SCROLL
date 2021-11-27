@@ -1,0 +1,1 @@
+.header{padding:60px;text-align:center;background:#1abc9c;margin-bottom:20px}.header,.header .title{color:#fff}.header .title span{font-style:italic;font-size:1.5rem;display:block}@media (max-width:450px){.header{padding:30px}.header .title{font-size:1rem}}.fade-enter-active,.fade-leave-active{transition:opacity 1s}.fade-enter,.fade-leave-to{opacity:0}
